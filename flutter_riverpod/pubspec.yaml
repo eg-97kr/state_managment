@@ -1,4 +1,4 @@
-name: flutter_riverpod
+name: flutter_riverpood
 description: A new Flutter package project.
 version: 0.0.1
 homepage:
@@ -8,8 +8,10 @@ environment:
   flutter: ">=1.17.0"
 
 dependencies:
+  flutter_riverpod: ^2.3.6
   flutter:
     sdk: flutter
+  
 
 dev_dependencies:
   flutter_test:
