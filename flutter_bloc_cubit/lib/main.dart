@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_bloc_bloc/business_logic/bloc.dart';
-import 'package:flutter_bloc_bloc/presentation/catalog_screen.dart';
+import 'package:flutter_bloc_cubit/business_logic/cart.dart';
+import 'package:flutter_bloc_cubit/presentation/catalog_screen.dart';
 
 void main() {
   runApp(
     BlocProvider(
-      create: (context) => CartBloc(),
+      create: (_) => Cart(),
       child: const MyApp(),
     ),
   );

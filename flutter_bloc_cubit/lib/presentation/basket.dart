@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_bloc_bloc/business_logic/bloc.dart';
-import 'package:flutter_bloc_bloc/business_logic/cart.dart';
+import 'package:flutter_bloc_cubit/business_logic/cart.dart';
+import 'package:flutter_bloc_cubit/data/models/products.dart';
 
 class FoodBasket extends StatelessWidget {
   const FoodBasket({super.key});
@@ -12,9 +12,12 @@ class FoodBasket extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
       ),
-      body: BlocBuilder<CartBloc, Cart>(
+      body: BlocBuilder<Cart, List<Product>>(
         builder: (context, cart) {
-          return cart.totalItems == 0
+          final itemCount = cart.length;
+          final totalPrice =
+              context.select((Cart cubit) => cubit.getTotalPrice());
+          return itemCount == 0
               ? const Center(
                   child: Text('В вашей корзине еще нет товаров'),
                 )
@@ -22,8 +25,8 @@ class FoodBasket extends StatelessWidget {
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Text('Товаров в корзине: ${cart.totalItems}'),
-                      Text('На сумму ${cart.totalPrice} P'),
+                      Text('Товаров в корзине: $itemCount'),
+                      Text('На сумму $totalPrice P'),
                     ],
                   ),
                 );

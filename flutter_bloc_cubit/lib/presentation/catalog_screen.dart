@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_bloc_bloc/business_logic/bloc.dart';
-import 'package:flutter_bloc_bloc/business_logic/cart_event.dart';
-import 'package:flutter_bloc_bloc/data/catalog.dart';
-import 'package:flutter_bloc_bloc/business_logic/cart.dart';
-import 'package:flutter_bloc_bloc/presentation/basket.dart';
+import 'package:flutter_bloc_cubit/data/catalog.dart';
+import 'package:flutter_bloc_cubit/business_logic/cart.dart';
+import 'package:flutter_bloc_cubit/data/models/products.dart';
+import 'package:flutter_bloc_cubit/presentation/basket.dart';
 
 class CatalogScreen extends StatelessWidget {
   CatalogScreen({super.key});
@@ -16,7 +15,7 @@ class CatalogScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: const Text('Flutter Bloc(bloc)'),
+        title: const Text('Flutter Bloc(cubit)'),
       ),
       body: ListView.builder(
         itemCount: products.length,
@@ -26,7 +25,7 @@ class CatalogScreen extends StatelessWidget {
             title: Text(product.name),
             subtitle: Text(product.price.toString()),
             trailing: const Icon(Icons.add_shopping_cart),
-            onTap: () => context.read<CartBloc>().add(AddProductEvent(product)),
+            onTap: () => context.read<Cart>().addProduct(product),
           );
         },
       ),
@@ -37,9 +36,9 @@ class CatalogScreen extends StatelessWidget {
             MaterialPageRoute(builder: (context) => const FoodBasket()),
           );
         },
-        child: BlocBuilder<CartBloc, Cart>(
+        child: BlocBuilder<Cart, List<Product>>(
           builder: (context, cart) {
-            final itemsCount = cart.totalItems;
+            final itemsCount = cart.length;
             return Container(
               height: 30,
               width: 170,

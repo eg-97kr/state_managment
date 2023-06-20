@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_bloc_bloc/business_logic/cart_event.dart';
-import 'package:flutter_bloc_bloc/data/models/cart.dart';
+import 'package:flutter_bloc_bloc/business_logic/cart.dart';
 import 'package:flutter_bloc_bloc/data/models/cart_item.dart';
 
 class CartBloc extends Bloc<CartEvent, Cart> {
